@@ -12,5 +12,6 @@
     Project_UI  : Contains front-end Files
     Project_API : Contains back-end API Files
 
-    Run_Servers : Runs shell script in Mac terminal to run servers
-    Kill_Servers: Runs shell script in Mac terminal to kill running servers
+    Run-Appp : 
+                Run_Servers : Runs shell script in Mac terminal to run servers
+                Kill_Servers: Runs shell script in Mac terminal to kill running servers
