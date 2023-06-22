@@ -1,0 +1,23 @@
+<!--///////////////////////////////////////////////////////////////////////////////////////////////////////
+    FILE  : create-template.component.html
+    AUTHOR : Pranav Sehgal
+             +Auto-generated on :
+                ng generate component create-template 
+
+    DESCRIPTION :   USED as the HTML file for creating Templates
+                    USES create-template.component.ts as component for typescript data 
+                    TO CREATE new component, use ng generate component <component name>
+////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<body style="display: flex;">
+    <div class = "form-container">
+        <h2 class="form-title" [autofocus]="true">Create Template</h2>
+        <div class="err-msg">{{tempService.errString}}</div>
+        <form style="display: inline;">
+            <div><input #tname type="text" class="genput" autofocus placeholder="Enter Template Name"></div>
+            <div><input #tmess type="text" class="genput" placeholder="Enter Template Message"></div>
+            <div style="font-size: 18px;">Boolean Status : <input #tbool type="checkbox" class="checkbox"></div>
+        </form>
+        <button class="create-page-button" (click)="createForm(tname.value, tmess.value, tbool.checked)">Click To Create</button><br>
+        <button class="create-page-button" routerLink="/templates/view">View All Template :</button>
+    </div>
+</body>

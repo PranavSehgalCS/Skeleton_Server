@@ -1,0 +1,33 @@
+<!--///////////////////////////////////////////////////////////////////////////////////////////////////////
+    FILE  : viewtemplate.component.html
+    AUTHOR : Pranav Sehgal
+             +Auto-generated on :
+                ng generate component viewtemplate 
+
+    DESCRIPTION :   USED as the HTML file for viewing single Template's Details
+                    USES viewtemplate.component.ts as component for typescript data 
+                    TO CREATE new component, use ng generate component <component name>
+////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<body style="display: flex;">
+    <div class="form-container" style="max-height:20rem;" [autofocus]="true">
+        <h2 class="form-title" [autofocus]="true">{{this.headerMessage}}</h2>
+        <div class = "infoid">
+            <div class = "info">ID : </div>
+            <div class = "id">{{this.curTemp.temid}}</div>
+        </div>
+        <div class = "infoid">
+            <div class = "info">NAME : </div>
+            <div class = "id">{{this.curTemp.tname}}</div>
+        </div>
+        <div class = "infoid">
+            <div class = "info">MESSAGE : </div>
+            <div class = "id">{{this.curTemp.tmess}}</div>
+        </div>
+        <div class = "infoid">
+            <div class = "info">BOOLEAN : </div>
+            <div class = "id">{{this.curTemp.tbool}}</div>
+        </div>
+        <button style="width:20rem; height:3rem;" class="create-page-button" routerLink="/templates/view">View  All Templates</button>
+    </div>
+
+</body>

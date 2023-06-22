@@ -1,0 +1,4 @@
+.vscode
+.DS_Store
+Project_API/target/
+Project_UI/angular-workspace/.angular/cache/

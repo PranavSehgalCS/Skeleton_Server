@@ -1,0 +1,26 @@
+<!--///////////////////////////////////////////////////////////////////////////////////////////////////////
+    FILE  : edit-template.component.html
+    AUTHOR : Pranav Sehgal
+             +Auto-generated on :
+                ng generate component edit-template 
+
+    DESCRIPTION :   USED as the HTML file for edit Templates
+                    USES edit-template.component.ts as component for typescript data 
+                    TO CREATE new component, use ng generate component <component name>
+////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<body style="display: flex;">
+    <div class = "form-container">
+        <h2 class="form-title" [autofocus]="true">Update Template</h2>
+        <div style = "margin-bottom: 1rem; ">{{this.headerMessage}}</div>
+        <form style="display: inline;">
+            <div><input #tname type="text" value = "{{this.curTemp.tname}}" class="genput" autofocus placeholder="Enter Template Name"></div>
+            <div><input #tmess type="text" value = "{{this.curTemp.tmess}}" class="genput" placeholder="Enter Template Message"></div>
+            <div style="font-size: 18px;">Boolean Status : <input #tbool type="checkbox" checked = "{{this.curTemp.tbool}}" class="checkbox"></div>
+        </form>
+        <button class="create-page-button" (click)="updateTemplate(tname.value, tmess.value, tbool.checked)">Click To Update</button><br>
+        <button class="create-page-button" routerLink="/templates/view">View All Templates</button>
+    </div>
+</body>
+
+
+

@@ -1,0 +1,30 @@
+<!--///////////////////////////////////////////////////////////////////////////////////////////////////////
+    FILE  : view-template.component.html
+    AUTHOR : Pranav Sehgal
+             +Auto-generated on :
+                ng generate component view-template 
+
+    DESCRIPTION :   USED as the HTML file for Viewing Templates
+                    USES view-template.component.ts as component for typescript data 
+                    TO CREATE new component, use ng generate component <component name>
+////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+<body>
+    <div class="page_head">{{mapToArr().length}} Templates Exist<a class="plus" routerLink="/templates/create">+</a></div>
+    <div class="{{getLine()}}" >
+        <div class="big-info-box">Template ID</div>
+        <div class="big-info-box">Template NAME</div>
+        <div class="big-info-box">Template MESSAGE</div>
+        <div class="big-info-box">Template BOOL</div>
+    </div>
+    <div *ngIf="refresh">
+        <a *ngFor="let temp of mapToArr()" class="{{getLine()}}">
+            <div class = "info-box">{{temp.temid}}</div>
+            <div class = "info-box">{{temp.tname}}</div>
+            <div class = "info-box">{{temp.tmess}}</div>
+            <div class = "info-box">{{temp.tbool}}</div>
+            <div><button class= "{{getBox()}}" (click)="vieButton(temp.temid)" >View</button></div>
+            <div><button class= "{{getBox()}}" (click)="ediButton(temp.temid)" >Edit</button></div>
+            <div><button class= "{{getBox()}}" (click)="delButton(temp.temid)" >Delete</button></div>
+        </a>
+    </div> 
+</body>

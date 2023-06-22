@@ -1,0 +1,138 @@
+/** ///////////////////////////////////////////////////////////////////////////////////////////////////////
+*   FILE  : template-styles.css
+*   AUTHOR : Pranav Sehgal
+*   DESCRIPTION : USED to write css for Templates (or any other file that uses this)
+*                 TO CREATE new component, use ng generate component <component name>
+///////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+
+body{
+    --box-size: 20px ;
+    --grey-dark:rgb(154, 154, 154);
+    --grey-light: rgb(239, 238, 238);
+    --grey-color:rgb(190, 188, 188);
+    --background: rgb(255, 255, 255);
+    
+    
+    width: 80rem;
+    height: 100rem;
+    font-size: 22px;
+    text-align: center;
+    align-content: center;
+    justify-content: space-around;
+    background-color: var(--background);
+}
+.page_head{
+    font-size: 42px;
+    margin-top: 2rem;
+    margin-left: 5rem;
+    margin-bottom: 3rem;
+    font-family: “Comic Sans MS”, “Comic Sans”, cursive;
+}
+.info-line, .info-line2{
+    height: 4rem;
+    width: 90rem;
+    display: flex;
+}
+.info-line2{
+    background-color: var(--grey-color);
+}
+.info-box, .big-info-box{
+    width:15rem;
+    margin-top: 1rem;
+    text-align: center;
+    vertical-align: middle;
+}
+.big-info-box{
+    font-size: 24px;
+}
+.form-container{
+    width: 35rem;
+    margin-top: 5rem;
+    padding: 1rem 0rem;
+    padding-bottom: 2rem;
+    border-radius: 20px;
+    background-color:  var(--grey-color);
+    max-height: 25rem;
+}
+.genput{
+    height: 2.2rem;
+    width: 15rem;
+    text-align: center;
+    border-radius: 32px;
+    margin-bottom: 1rem ;
+}
+.checkbox{
+    width: var(--box-size);
+    height: var(--box-size);
+}
+
+.box-comp,.box-comp2{
+    border:none;
+    width:8rem;
+    height: 2.5rem;
+    font-size: 20px;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    text-decoration: none;
+    border-radius: 15px;
+    background-color: var(--grey-color);
+}
+.box-comp2{
+    background-color: var(--grey-light);
+}
+.box-comp:hover, .box-comp2:hover{
+    padding: 0.5rem;
+    font-size: 23px;
+    height: 3rem;
+    margin-top: 0.5rem;
+    background-color: var(--grey-dark);
+    transition-duration: 0.2s;
+}
+.create-page-button{
+    width: 12rem;
+    height: 2rem;
+    font-size: 18px;
+    margin:0.5rem;
+    border-radius: 10px;
+}
+.create-page-button:hover{
+    font-size: 20px;
+    width:14rem;
+    transition-duration: 0.2s;
+}
+.plus{
+    color:white;
+    font-size: 30px;
+    margin-left: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 10px;
+    text-decoration: none;
+    background-color: var(--grey-color);
+}
+.plus:hover{
+    font-size: 38px;
+    border-radius: 18px;
+    transition-duration: 0.2s;
+    background-color: var(--grey-dark); 
+}
+.err-msg{
+    font-size: 24px;
+    margin:0.5rem;
+    color: #ff0000;
+}
+.infoid{
+    width: 26rem;
+    display: flex;
+    margin-left: 5rem;
+    margin-bottom: 0.5rem;
+    justify-self: center;
+}
+.info{
+    width:8.5rem;
+    text-align: left;
+}
+.id{
+    text-align: left;
+}
