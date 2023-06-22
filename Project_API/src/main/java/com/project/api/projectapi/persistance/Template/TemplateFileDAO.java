@@ -23,24 +23,24 @@ import org.springframework.beans.factory.annotation.Value;
 
 @Component
 public class TemplateFileDAO implements TemplateDAO{
-    private int nextID;
+    public int nextID;
     private String fileName;
     private ObjectMapper fileHandler;
-    private Boolean initialized = false;
-    private Map<Integer, Template> TemplateHolder = new TreeMap<Integer, Template>();
+    public static Boolean initialized = false;
+    public Map<Integer, Template> TemplateHolder = new TreeMap<Integer, Template>();
 
     public TemplateFileDAO( ObjectMapper fileHandler,
                             @Value("${template.data}") String fileName){
         try {
             this.fileName = fileName;
             this.fileHandler = fileHandler;
-            this.initialized = this.loadTemplates();
+            TemplateFileDAO.initialized = this.loadTemplates();
         } catch (Exception e) {
             System.out.println("\nERROR While loading initial file --> " + e);
         }
     }
     
-    private Boolean loadTemplates(){
+    public Boolean loadTemplates(){
         try {
             this.TemplateHolder.clear();
             Template[] templateArray = fileHandler.readValue(new File(fileName),Template[].class);
@@ -56,10 +56,9 @@ public class TemplateFileDAO implements TemplateDAO{
         }
         return false;
     }
-    private Boolean saveTemplates(){
+    public Boolean saveTemplates(){
         try {
             fileHandler.writeValue(new File(fileName), this.TemplateHolder.values());
-            this.initialized = false;
             return true;
         } catch (Exception e) {
             System.out.println("ERROR While saving to file : --> "+ e);
@@ -70,8 +69,8 @@ public class TemplateFileDAO implements TemplateDAO{
     @Override
     public Template[] getTemplates(int temid){
         try {
-            if(!this.initialized){
-                this.initialized = loadTemplates();
+            if(!TemplateFileDAO.initialized){
+                TemplateFileDAO.initialized = loadTemplates();
             }
             Template[] retVal =  new Template[1];
             if(temid != -1){
@@ -131,7 +130,10 @@ public class TemplateFileDAO implements TemplateDAO{
     @Override
     public Boolean deleteTemplate(int temid){
         try {
-            TemplateHolder.remove(temid);
+            Template remVal = TemplateHolder.remove(temid);
+            if(remVal == null){
+                return false;
+            }
             return saveTemplates();
         } catch (Exception e) {
             System.out.println("ERROR at function while deleting template --> " + e);
