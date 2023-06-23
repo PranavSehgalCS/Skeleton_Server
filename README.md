@@ -13,5 +13,6 @@
     Project_API : Contains back-end API Files
 
     Run-Appp : 
-                Run_Servers : Runs shell script in Mac terminal to run servers
+                Run_App     : Runs shell script in Mac terminal to run servers
+                Run_Tests   : Runs shell script in Mac terminal to execute test and coverage
                 Kill_Servers: Runs shell script in Mac terminal to kill running servers
