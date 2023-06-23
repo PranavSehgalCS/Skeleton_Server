@@ -10,7 +10,7 @@ package com.project.api.projectapi.controller;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 import java.util.logging.Level;
 import java.util.logging.Logger;
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 //import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-///////////////////////////////////////////////////////////////////////////////////////////////////////
+
 import com.project.api.projectapi.model.Template;
 import com.project.api.projectapi.persistance.Template.TemplateDAO;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,19 +30,27 @@ import com.project.api.projectapi.persistance.Template.TemplateDAO;
 @RequestMapping("template")
 public class TemplateController{
     private  TemplateDAO templateDao;
+    public boolean testingCatch = false;
     private static final Logger LOG = Logger.getLogger(TemplateController.class.getName());
     public TemplateController(TemplateDAO templateDao) {
         this.templateDao = templateDao;
+    }
+    public void exceptionTest(){
+        if(testingCatch){
+            testingCatch = false;
+            throw new RuntimeException();
+        }
     }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
     @GetMapping("")
     public ResponseEntity<Template[]>getAllTemps( ){
         LOG.info("\nGET /template");
         try {
-        Template[] retVal = this.templateDao.getTemplates(-1);
+            exceptionTest();
+            Template[] retVal = this.templateDao.getTemplates(-1);
             return new ResponseEntity<Template[]>(retVal,HttpStatus.OK);
         } catch (Exception e) {
-            LOG.log(Level.SEVERE,"ERROR At Controller While Getting --> "+e.getLocalizedMessage());
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -51,6 +59,7 @@ public class TemplateController{
     public ResponseEntity<Template[]>getTLFromPaths(  @PathVariable Integer temid){
         LOG.info("\nGET /template/"+temid);
         try {
+            exceptionTest();
             Template[] retVal = this.templateDao.getTemplates(temid);
             if(retVal!=null){
                 return new ResponseEntity<Template[]>(retVal ,HttpStatus.OK);
@@ -65,12 +74,13 @@ public class TemplateController{
     }
 
     @GetMapping("/params" )
-    public ResponseEntity<Template>getTLFromParam(  @RequestParam(name = "temid", required = true) Integer temid){
+    public ResponseEntity<Template[]>getTLFromParam(  @RequestParam(name = "temid", required = true) Integer temid){
         LOG.info("\nGET /template/"+temid);
         try {
-            Template retVal = this.templateDao.getTemplates(temid)[0];
+            exceptionTest();
+            Template[] retVal = this.templateDao.getTemplates(temid);
             if(retVal!=null){
-                return new ResponseEntity<Template>(retVal ,HttpStatus.OK);
+                return new ResponseEntity<Template[]>(retVal ,HttpStatus.OK);
             }else{
                 return new ResponseEntity<>(HttpStatus.CONFLICT);
             }
@@ -87,6 +97,7 @@ public class TemplateController{
                                                 ){
         LOG.info("\nPOST /template/" + tname );
         try{
+            exceptionTest();
             Boolean responseVal = templateDao.createTemplate(tname,tmess,tbool);
             if(responseVal){
                 return new ResponseEntity<Boolean>(responseVal, HttpStatus.CREATED);
@@ -109,6 +120,7 @@ public class TemplateController{
                                                 ){
         LOG.info("\nPUT /template/" + temid + ":" + tname);
         try{
+            exceptionTest();
             Boolean reponseVal =  templateDao.updateTemplate(temid, tname, tdesc, tbool);
             if(reponseVal){
                 return new ResponseEntity<Boolean>(reponseVal, HttpStatus.OK);
@@ -128,6 +140,7 @@ public class TemplateController{
                                                     ){
         LOG.info("\nDELETE /template/" + temid);
         try {
+            exceptionTest();
             Boolean reponseVal =  templateDao.deleteTemplate(temid);
             if(reponseVal){
                 return new ResponseEntity<Boolean>(reponseVal, HttpStatus.OK);

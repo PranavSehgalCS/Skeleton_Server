@@ -26,22 +26,28 @@ public class TemplateFileDAO implements TemplateDAO{
     public int nextID;
     private String fileName;
     private ObjectMapper fileHandler;
-    public static Boolean initialized = false;
+    public Boolean initialized = false;
     public Map<Integer, Template> TemplateHolder = new TreeMap<Integer, Template>();
+
+    public boolean testingCatch = false;
 
     public TemplateFileDAO( ObjectMapper fileHandler,
                             @Value("${template.data}") String fileName){
         try {
+            if(fileHandler == null){
+                throw new NullPointerException();
+            }
             this.fileName = fileName;
             this.fileHandler = fileHandler;
-            TemplateFileDAO.initialized = this.loadTemplates();
+            this.initialized = this.loadTemplates();
         } catch (Exception e) {
-            System.out.println("\nERROR While loading initial file --> " + e);
+            System.out.println("ERROR at constructor while loading initial file --> " + e);
         }
     }
     
     public Boolean loadTemplates(){
         try {
+            exceptionTester();
             this.TemplateHolder.clear();
             Template[] templateArray = fileHandler.readValue(new File(fileName),Template[].class);
             for(Template i:templateArray){
@@ -52,12 +58,13 @@ public class TemplateFileDAO implements TemplateDAO{
             }
             return true;
         } catch (Exception e) {
-            System.out.println("ERROR While loading templates from file --> \n" + e);
+            System.out.println("ERROR While loading templates from file --> " + e);
         }
         return false;
     }
     public Boolean saveTemplates(){
         try {
+            exceptionTester();
             fileHandler.writeValue(new File(fileName), this.TemplateHolder.values());
             return true;
         } catch (Exception e) {
@@ -65,12 +72,18 @@ public class TemplateFileDAO implements TemplateDAO{
         }
         return false;
     }
-    
+    public void exceptionTester() throws Exception{
+        if(testingCatch){
+            throw new RuntimeException();
+        }
+    } 
+
     @Override
     public Template[] getTemplates(int temid){
         try {
-            if(!TemplateFileDAO.initialized){
-                TemplateFileDAO.initialized = loadTemplates();
+            exceptionTester();
+            if(!this.initialized){
+                this.initialized = loadTemplates();
             }
             Template[] retVal =  new Template[1];
             if(temid != -1){
@@ -87,7 +100,7 @@ public class TemplateFileDAO implements TemplateDAO{
                 return retVal;
             }
         } catch (Exception e) {
-            System.out.println("Error At Function While Getting With Id : " + temid);
+            System.out.println("Error At Function While Getting With Id (" + temid + ") -->" + e);
             return null;
         }
     }
@@ -95,6 +108,7 @@ public class TemplateFileDAO implements TemplateDAO{
     @Override
     public Boolean createTemplate(String tname, String tmess, Boolean tbool){
         try {
+            exceptionTester();
             this.nextID++;
             Template newTemplate = new Template((nextID-1), tname, tmess, tbool);
             this.TemplateHolder.put(newTemplate.getTemid(), newTemplate);
@@ -108,6 +122,7 @@ public class TemplateFileDAO implements TemplateDAO{
     @Override
     public Boolean updateTemplate(int temid, String tname, String tmess, Boolean tbool){
         try{
+            exceptionTester();
             Boolean existState = false;
             for(Template i:TemplateHolder.values()){
                 if(i.getTemid() == temid){
@@ -130,6 +145,7 @@ public class TemplateFileDAO implements TemplateDAO{
     @Override
     public Boolean deleteTemplate(int temid){
         try {
+            exceptionTester();
             Template remVal = TemplateHolder.remove(temid);
             if(remVal == null){
                 return false;

@@ -7,18 +7,18 @@
 #                   OPENS a Terminal window and launches fronted using ng serve --open;
 #///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-osascript -e 'tell application "Terminal" to do script "cd Desktop/P3/Skeleton_Server/Project_API;
-source ~/.bashrc;
-title backend_marked_for_deletion;
-mvn compile exec:java;mvn compile exec:java;"'
+dir="${0%/*}";
+parentdir="$(dirname "$dir")"
+
+sleep 1;
+cd $parentdir;
+
+open Run-App/Seprate_Scripts/run_maven.sh
+open Run-App/Seprate_Scripts/run_angular.sh
 
 
-cd Desktop/P3/Skeleton_Server/Project_UI/angular-workspace/
-rm -r .angular/cache;
+rm -r /Project_UI/angular-workspace/.angular/cache;
 
-sleep 0.5;
+sleep 2;
 
-osascript -e 'tell application "Terminal" to do script "cd Desktop/P3/Skeleton_Server/Project_UI/angular-workspace; 
-source ~/.bashrc;
-title frontend_marked_for_deletion;
-ng serve --open;"'
+osascript -e 'tell application "Terminal" to close (every window whose name contains "Run_App.sh")' &

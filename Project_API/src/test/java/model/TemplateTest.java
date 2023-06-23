@@ -1,11 +1,11 @@
-package ModelTests;
+package model;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import com.project.api.projectapi.model.Template;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Tag("model-tier")
+@Tag("model")
 public class TemplateTest {
 
     @Test

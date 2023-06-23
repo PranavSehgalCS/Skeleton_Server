@@ -51,13 +51,7 @@
 							<executable>mvn</executable>
 							<arguments>
 								<argument>clean</argument>
-								<argument>test-compile</argument>
-								<argument>surefire:test@model</argument>
-								<argument>jacoco:report@model</argument>
-								<argument>surefire:test@controller</argument>
-								<argument>jacoco:report@controller</argument>
-								<argument>surefire:test@persistence</argument>
-								<argument>jacoco:report@persistence</argument>
+								<argument>test-compile</argument>	
 							</arguments>
 						</configuration>
 					</execution>
@@ -72,6 +66,10 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>${jacoco.version}</version>
 				<configuration>
+					<excludes>
+						<exclude>/com/project/api/projectapi/*.class</exclude>
+						<exclude></exclude>
+					</excludes>
 					<destfile>/target/coverage-reports/jacoco-unit.exec</destfile>
 					<datafile>/target/coverage-reports/jacoco-unit.exec</datafile>
 				</configuration>
@@ -138,7 +136,7 @@
 								 <limit>
 								   <counter>INSTRUCTION</counter>
 								   <value>COVEREDRATIO</value>
-								   <minimum>0.50</minimum>
+								   <minimum>0.85</minimum>
 								 </limit>
 							 </limits>
 								 </rule>
