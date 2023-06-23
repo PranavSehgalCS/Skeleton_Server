@@ -12,7 +12,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import com.project.api.projectapi.model.Template;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.project.api.projectapi.controller.TemplateController;
 import com.project.api.projectapi.persistance.Template.TemplateDAO;
